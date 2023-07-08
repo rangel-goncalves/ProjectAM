@@ -38,8 +38,8 @@ public class Manager {
         System.out.println(log);
     }
 
-    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code) throws ArduinoException {
-        Device d = new Device(port, baudRate, Latitude, Longitude, code);
+    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist) throws ArduinoException {
+        Device d = new Device(port, baudRate, Latitude, Longitude, code, maxDist);
         devices.add(d);
     }
 
@@ -51,6 +51,15 @@ public class Manager {
                 //device.LookAt(ang);
                 System.out.println(device.getCode() + "se moveu para " + ang + "---"+ LocalDateTime.now()+ "\n");
                 this.log += device.getCode() + "se moveu para " + ang + "---"+ LocalDateTime.now()+ "\n";
+                
+            }
+        }
+    }
+
+    public void Search(Target targ) throws SerialPortException, ArduinoException {
+        for (Device device : devices) {
+            double look = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), targ.getLatitude(), targ.getLongitude(), device.getMaxDist());
+            if(look!=-1){
                 
             }
         }

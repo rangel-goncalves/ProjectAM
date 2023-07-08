@@ -11,7 +11,8 @@ public class GeoTool {
     
     public double SearchCaller(double firstLatitude, double firstLongitude, double secondLatitude, double secondLongitude, double maxDist){
         if(this.latAndLgnToDistance(firstLatitude, firstLongitude, secondLatitude, secondLongitude) <= maxDist){
-            return this.angleCalculator(firstLatitude, firstLongitude, secondLatitude, secondLongitude);
+            //return this.angleCalculator(firstLatitude, firstLongitude, secondLatitude, secondLongitude);
+            return 1;
         }
         return -1;
     }
