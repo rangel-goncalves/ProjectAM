@@ -43,6 +43,10 @@ public class Manager {
         devices.add(d);
     }
 
+    public void continueSearch(){
+        
+    }
+    
     public void Search(double Latitude, double Longitude) throws SerialPortException, ArduinoException {
         for (Device device : devices) {
             double ang = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), Latitude, Longitude, this.maxDistance);

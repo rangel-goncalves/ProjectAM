@@ -19,6 +19,7 @@ public class Device {
     private String code;
     private double Latitude, Longitude;
     private double angle;
+    private double sharedAngle;
     private double viewingAngle;
     private double minViewingAngle;
     private double maxViewingAngle;
@@ -120,11 +121,20 @@ public class Device {
     public void setMaxViewingAngle(double maxViewingAngle) {
         this.maxViewingAngle = maxViewingAngle;
     }
+
+    public void LookAt() {
+        if (true) {
+
+        }
+    }
+
     /**
-     * atualizar o nome da função comecei pra um proposito e mudei pra outro totalmente diferente
-     * @param targ 
+     * atualizar o nome da função comecei pra um proposito e mudei pra outro
+     * totalmente diferente
+     *
+     * @param targ
      */
-    public void AddTarget(Target targ) {
+    public void AddTarget(Target targ, int nada) {
         if (this.targets.size() == 0) {
             this.targets.add(targ);
             targ.setPriority(true);
@@ -135,12 +145,12 @@ public class Device {
                 min += 360;
             }
             this.setMinViewingAngle(min);
-            System.out.println(this.getMinViewingAngle()+" ate "+ this.getMaxViewingAngle());
+            System.out.println(this.getMinViewingAngle() + " ate " + this.getMaxViewingAngle());
             System.out.println(this.getAngle());
         } else {
             double theta2 = this.geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude());
             double theta1 = this.getAngle();
-            System.out.println(theta2+" esse");
+            System.out.println(theta2 + " esse");
             if (theta2 <= this.getMaxViewingAngle() && theta2 >= this.getMinViewingAngle()) {
                 // Cálculo das coordenadas x e y do ponto médio
                 double x = (Math.cos(theta1) + Math.cos(theta2)) / 2;
@@ -152,13 +162,76 @@ public class Device {
                 if (grausMedio < 0) {
                     grausMedio += 360;
                 }
+                this.sharedAngle = grausMedio;
                 System.out.println(grausMedio);
-            }else{
+            } else {
                 System.out.println("fora de vista");
             }
         }
     }
+    
+    public void AddTarget(Target targ) {
+        if (this.targets.size() == 0) {
+            this.PriorityTargetAnglecalculator(targ);
+        } else {
+            this.SharedAngleCalculartor(targ);
+        }
+    }
+        
 
+    public void RemoveTarget(Target targ) {
+        for (int i = 0; i < this.targets.size(); i++) {
+            if (this.targets.get(i).getTargetCode() == targ.getTargetCode()) {
+                this.targets.remove(i);
+                this.targets.get(i).setPriority(false);
+                if (i == 0) {
+                    //função de calcular o angulo separado, vai ficar mais organizado
+                }
+            }
+        }
+    }
+
+    public void PriorityTargetAnglecalculator(Target targ) {
+        this.targets.add(targ);
+        targ.setPriority(true);
+        this.setAngle(geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude()));
+        this.setMaxViewingAngle((this.getAngle() + this.getViewingAngle() / 2) % 360.0);
+        double min = (this.getAngle() - this.getViewingAngle() / 2) % 360.0;
+        if (min < 0) {
+            min += 360;
+        }
+        this.setMinViewingAngle(min);
+        System.out.println(this.getMinViewingAngle() + " ate " + this.getMaxViewingAngle());
+        System.out.println(this.getAngle());
+    }
+
+    public void SharedAngleCalculartor(Target targ) {
+            double theta2 = this.geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude());
+            double theta1 = this.getAngle();
+            System.out.println(theta2 + " esse");
+            if (theta2 <= this.getMaxViewingAngle() && theta2 >= this.getMinViewingAngle()) {
+                // Cálculo das coordenadas x e y do ponto médio
+                double x = (Math.cos(theta1) + Math.cos(theta2)) / 2;
+                double y = (Math.sin(theta1) + Math.sin(theta2)) / 2;
+                // Cálculo do ângulo do ponto médio
+                double thetaMedio = Math.atan2(y, x);
+                // Conversão do ângulo para graus
+                double grausMedio = Math.toDegrees(thetaMedio);
+                if (grausMedio < 0) {
+                    grausMedio += 360;
+                }
+                this.sharedAngle = grausMedio;
+                System.out.println(grausMedio);
+            }
+    }
+
+    /**
+     * NÃo USE!
+     *
+     * @param angle
+     * @throws SerialPortException
+     * @throws ArduinoException
+     */
     public void LookAt(double angle) throws SerialPortException, ArduinoException {
         if (angle != this.getAngle()) {
             this.sendData(String.valueOf(angle));
