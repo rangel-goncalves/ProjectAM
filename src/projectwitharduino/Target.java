@@ -12,6 +12,12 @@ public class Target {
     private int targetCode;
     private String targetData;
 
+    public Target(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    
     public Target(int targetCode) {
         this.targetCode = targetCode;
     }

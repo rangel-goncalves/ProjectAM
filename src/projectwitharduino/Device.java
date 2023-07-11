@@ -34,6 +34,9 @@ public class Device {
         this.Longitude = Longitude;
         this.code = code;
         this.maxDist = maxDist;
+        this.targets = new ArrayList();
+        this.geoTool = new GeoTool();
+        this.setViewingAngle(90.0);
         arduino = new PanamaHitek_Arduino();
         //arduino.arduinoTX(portName, baudRate);
     }
@@ -124,11 +127,12 @@ public class Device {
             targ.setPriority(true);
             this.setAngle(geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude()));
             this.setMaxViewingAngle((this.getAngle() + this.getViewingAngle() / 2) % 360.0);
-            double max = (this.getAngle() - this.getViewingAngle() / 2) % 360.0;
-            if (max < 0) {
-                max += 360;
+            double min = (this.getAngle() - this.getViewingAngle() / 2) % 360.0;
+            if (min < 0) {
+                min += 360;
             }
-            this.setMaxViewingAngle(max);
+            this.setMinViewingAngle(min);
+            System.out.println(this.getAngle());
         } else {
             double theta2 = this.geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude());
             double theta1 = this.getAngle();
@@ -144,6 +148,8 @@ public class Device {
                     grausMedio += 360;
                 }
                 System.out.println(grausMedio);
+            }else{
+                System.out.println("fora de vista");
             }
         }
     }

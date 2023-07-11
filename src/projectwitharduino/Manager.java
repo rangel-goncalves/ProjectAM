@@ -59,8 +59,9 @@ public class Manager {
     public void Search(Target targ) throws SerialPortException, ArduinoException {
         for (Device device : devices) {
             double look = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), targ.getLatitude(), targ.getLongitude(), device.getMaxDist());
+            System.out.println(look);
             if(look!=-1){
-                
+                device.AddTarget(targ);
             }
         }
     }
