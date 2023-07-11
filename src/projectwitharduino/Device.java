@@ -120,7 +120,10 @@ public class Device {
     public void setMaxViewingAngle(double maxViewingAngle) {
         this.maxViewingAngle = maxViewingAngle;
     }
-
+    /**
+     * atualizar o nome da função comecei pra um proposito e mudei pra outro totalmente diferente
+     * @param targ 
+     */
     public void AddTarget(Target targ) {
         if (this.targets.size() == 0) {
             this.targets.add(targ);
@@ -132,10 +135,12 @@ public class Device {
                 min += 360;
             }
             this.setMinViewingAngle(min);
+            System.out.println(this.getMinViewingAngle()+" ate "+ this.getMaxViewingAngle());
             System.out.println(this.getAngle());
         } else {
             double theta2 = this.geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude());
             double theta1 = this.getAngle();
+            System.out.println(theta2+" esse");
             if (theta2 <= this.getMaxViewingAngle() && theta2 >= this.getMinViewingAngle()) {
                 // Cálculo das coordenadas x e y do ponto médio
                 double x = (Math.cos(theta1) + Math.cos(theta2)) / 2;
