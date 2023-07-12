@@ -23,11 +23,11 @@ public class ProjectWithArduino {
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM1", 0, -9.532860575530622, -35.791900658297514, "1",30);
-        m.AddDevice("COM2", 0, -9.53309500221512, -35.79228221325831, "2",30);
+        m.AddDevice("COM1", 0, -9.553520907315425, -35.776896682211884, "1",30);
+        m.AddDevice("COM2", 0, -9.552624215970157, -35.77514478918786, "2",500);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
-        Target t1 = new Target(-9.532936603287444, -35.7925582442185);
+        Target t1 = new Target(-9.553025870095075, -35.77706380365411);
         Target t2 = new  Target(-9.532878883895584, -35.79245432257558);
         t.add(t1);
         t.add(t2);
@@ -35,6 +35,9 @@ public class ProjectWithArduino {
             double latitude = scanner.nextDouble();
             //double longitude = scanner.nextDouble();
             if(latitude == -1.00){
+                break;
+            }
+            if(i==t.size()){
                 break;
             }
             m.Search(t.get(i));

@@ -134,7 +134,7 @@ public class Device {
      *
      * @param targ
      */
-    public void AddTarget(Target targ, int nada) {
+    public void UnusedAddTarget(Target targ, int nada) {
         if (this.targets.size() == 0) {
             this.targets.add(targ);
             targ.setPriority(true);
@@ -178,7 +178,6 @@ public class Device {
         }
     }
         
-
     public void RemoveTarget(Target targ) {
         for (int i = 0; i < this.targets.size(); i++) {
             if (this.targets.get(i).getTargetCode() == targ.getTargetCode()) {
@@ -186,6 +185,10 @@ public class Device {
                 this.targets.get(i).setPriority(false);
                 if (i == 0) {
                     //função de calcular o angulo separado, vai ficar mais organizado
+                    if(!this.targets.isEmpty()){
+                        this.targets.get(i+1).setPriority(true);
+                        this.PriorityTargetAnglecalculator(this.targets.get(i+1));
+                    }
                 }
             }
         }
