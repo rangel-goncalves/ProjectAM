@@ -23,12 +23,12 @@ public class ProjectWithArduino {
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM1", 0, -9.553520907315425, -35.776896682211884, "1",30);
-        m.AddDevice("COM2", 0, -9.552624215970157, -35.77514478918786, "2",500);
+        m.AddDevice("COM1", 0, -9.55300246234958, -35.777077364782144, "1",300);
+        m.AddDevice("COM2", 0,-9.553057049565655, -35.77716962286554, "2",500);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
-        Target t1 = new Target(-9.553025870095075, -35.77706380365411);
-        Target t2 = new  Target(-9.532878883895584, -35.79245432257558);
+        Target t1 = new Target(-9.552972136114636, -35.77740949388239);
+        Target t2 = new  Target(-9.553135897751222, -35.77707121424325);
         t.add(t1);
         t.add(t2);
         while(true){

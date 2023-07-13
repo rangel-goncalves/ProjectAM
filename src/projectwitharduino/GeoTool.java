@@ -28,7 +28,8 @@ public class GeoTool {
                 * Math.cos(deltaLongitudeInRad) + Math.sin(firstLatToRad)
                 * Math.sin(secondLatToRad)) * EARTH_RADIUS_KM;
         this.angleCalculator(firstLatitude, firstLongitude, secondLatitude, secondLongitude);
-        return a;
+        System.out.println("distancia "+a*1000);
+        return a*1000;
     }
 
     /**
