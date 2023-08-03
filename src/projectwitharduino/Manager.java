@@ -8,6 +8,8 @@ import jssc.SerialPortException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import com.fazecast.jSerialComm.SerialPort;
+
 
 /**
  *
@@ -40,6 +42,7 @@ public class Manager {
 
     public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist) throws ArduinoException {
         Device d = new Device(port, baudRate, Latitude, Longitude, code, maxDist);
+        System.out.println("adcionei");
         devices.add(d);
     }
 
@@ -65,6 +68,7 @@ public class Manager {
             double look = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), targ.getLatitude(), targ.getLongitude(), device.getMaxDist());
             System.out.println(look);
             if(look!=-1){
+                System.out.println("entrei");
                 device.AddTarget(targ);
             }
         }

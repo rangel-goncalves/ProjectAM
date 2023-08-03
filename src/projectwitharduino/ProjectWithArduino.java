@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
+import com.fazecast.jSerialComm.SerialPort;
+
 
 /**
  *
@@ -23,8 +25,7 @@ public class ProjectWithArduino {
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM1", 0, -9.55300246234958, -35.777077364782144, "1",300);
-        m.AddDevice("COM2", 0,-9.553057049565655, -35.77716962286554, "2",500);
+        m.AddDevice("COM3", 9600, -9.55300246234958, -35.777077364782144, "3",300);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
         Target t1 = new Target(-9.552972136114636, -35.77740949388239);

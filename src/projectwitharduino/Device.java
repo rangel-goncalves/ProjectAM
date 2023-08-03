@@ -3,17 +3,21 @@ package projectwitharduino;
 import com.panamahitek.ArduinoException;
 import com.panamahitek.PanamaHitek_Arduino;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
+import com.fazecast.jSerialComm.SerialPort;
+
 
 /**
  *
  * @author Rangel
  */
-public class Device {
+public final class Device {
 
-    private PanamaHitek_Arduino arduino;
+    private final PanamaHitek_Arduino arduino;
     private String portName;
     private int baudRate;
     private String code;
@@ -39,7 +43,7 @@ public class Device {
         this.geoTool = new GeoTool();
         this.setViewingAngle(90.0);
         arduino = new PanamaHitek_Arduino();
-        //arduino.arduinoTX(portName, baudRate);
+        arduino.arduinoTX(portName, this.baudRate);
     }
 
     public double getLatitude() {
@@ -205,6 +209,12 @@ public class Device {
         }
         this.setMinViewingAngle(min);
         System.out.println(this.getMinViewingAngle() + " ate " + this.getMaxViewingAngle());
+        try {
+            System.out.println("entei1");
+            this.LookAt(this.getAngle());
+        } catch (SerialPortException | ArduinoException ex) {
+            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println(this.getAngle());
     }
 
@@ -224,6 +234,12 @@ public class Device {
                     grausMedio += 360;
                 }
                 this.sharedAngle = grausMedio;
+                try {
+                    System.out.println("entrei2");
+                    this.LookAt(this.sharedAngle);
+                } catch (SerialPortException | ArduinoException ex) {
+                    Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.out.println(grausMedio);
             }
     }
@@ -236,10 +252,10 @@ public class Device {
      * @throws ArduinoException
      */
     public void LookAt(double angle) throws SerialPortException, ArduinoException {
-        if (angle != this.getAngle()) {
+        
             this.sendData(String.valueOf(angle));
             this.setAngle(angle);
-        }
+        
     }
 
     public void sendData(String data) throws SerialPortException, ArduinoException {
