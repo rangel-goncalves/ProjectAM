@@ -21,14 +21,17 @@ public class ProjectWithArduino {
         m.AddDevice("COM4", 9600, -9.532860575530622, -35.791900658297514, "1",30);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
-        Target t1 = new Target(-9.532936603287444, -35.7925582442185);
-        Target t2 = new  Target(-9.532878883895584, -35.79245432257558);
+        Target t1 = new Target(-9.552972136114636, -35.77740949388239);
+        Target t2 = new  Target(-9.553135897751222, -35.77707121424325);
         t.add(t1);
         t.add(t2);
         while(true){
             double latitude = scanner.nextDouble();
             //double longitude = scanner.nextDouble();
             if(latitude == -1.00){
+                break;
+            }
+            if(i==t.size()){
                 break;
             }
             m.Search(t.get(i));
