@@ -223,7 +223,6 @@ public class Device {
                     grausMedio += 360;
                 }
                 this.sharedAngle = grausMedio;
-                    System.out.println("entrei2");
                     this.LookAt(this.sharedAngle);
 
                 System.out.println(grausMedio);
