@@ -3,6 +3,7 @@ package projectwitharduino;
 import com.fazecast.jSerialComm.SerialPort;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 
@@ -237,8 +238,9 @@ public class Device {
      * @throws ArduinoException
      */
     public void LookAt(double angle){
-            this.sendData(new DecimalFormat("#,##0.00").format(angle));
-            this.setAngle(angle);
+        String valueString = String.format(Locale.US, "%.8f", angle);
+        this.sendData(valueString);
+        this.setAngle(angle);
         
     }
 
