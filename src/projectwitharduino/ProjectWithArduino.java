@@ -1,13 +1,8 @@
 package projectwitharduino;
 
-import java.util.Scanner;
-import com.panamahitek.ArduinoException;
-import com.panamahitek.PanamaHitek_Arduino;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import jssc.SerialPortEvent;
-import jssc.SerialPortEventListener;
-import jssc.SerialPortException;
+import java.util.Scanner;
+
 
 /**
  *
@@ -19,12 +14,11 @@ public class ProjectWithArduino {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SerialPortException, ArduinoException {
+    public static void main(String[] args){
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM1", 0, -9.532860575530622, -35.791900658297514, "1",30);
-        m.AddDevice("COM2", 0, -9.53309500221512, -35.79228221325831, "2",30);
+        m.AddDevice("COM4", 9600, -9.532860575530622, -35.791900658297514, "1",30);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
         Target t1 = new Target(-9.532936603287444, -35.7925582442185);

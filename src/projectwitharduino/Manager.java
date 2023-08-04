@@ -1,10 +1,5 @@
 package projectwitharduino;
 
-import com.panamahitek.ArduinoException;
-import com.panamahitek.PanamaHitek_Arduino;
-import jssc.SerialPortEvent;
-import jssc.SerialPortEventListener;
-import jssc.SerialPortException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,12 +33,16 @@ public class Manager {
         System.out.println(log);
     }
 
-    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist) throws ArduinoException {
+    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist){
         Device d = new Device(port, baudRate, Latitude, Longitude, code, maxDist);
         devices.add(d);
     }
 
-    public void Search(double Latitude, double Longitude) throws SerialPortException, ArduinoException {
+        public void continueSearch(){
+        
+    }
+    
+    public void Search(double Latitude, double Longitude){
         for (Device device : devices) {
             double ang = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), Latitude, Longitude, this.maxDistance);
             System.out.println(ang);
@@ -56,12 +55,13 @@ public class Manager {
         }
     }
 
-    public void Search(Target targ) throws SerialPortException, ArduinoException {
+    public void Search(Target targ){
         for (Device device : devices) {
             double look = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), targ.getLatitude(), targ.getLongitude(), device.getMaxDist());
             System.out.println(look);
             if(look!=-1){
                 device.AddTarget(targ);
+                //System.out.println("data enviada"+device.receiveData());
             }
         }
     }
