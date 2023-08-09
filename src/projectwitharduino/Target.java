@@ -5,6 +5,7 @@ package projectwitharduino;
  * @author Rangel
  */
 public class Target {
+    
     private double latitude;
     private double longitude;
     private boolean priority;

@@ -1,7 +1,6 @@
 package projectwitharduino;
 
 import com.fazecast.jSerialComm.SerialPort;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -13,8 +12,8 @@ import java.util.Locale;
  */
 public class Device {
 
-    private String portName;
-    private int baudRate;
+    private final String portName;
+    private final int baudRate;
     private String code;
     private double Latitude, Longitude;
     private double angle;
@@ -25,7 +24,7 @@ public class Device {
     private boolean aiming;
     private ArrayList<Target> targets;
     private double maxDist;
-    private GeoTool geoTool;
+    private final GeoTool geoTool;
 
     public Device(String portName, int baudRate, double Latitude, double Longitude, String code, double maxDist){
         this.portName = portName;
@@ -34,7 +33,7 @@ public class Device {
         this.Longitude = Longitude;
         this.code = code;
         this.maxDist = maxDist;
-        this.targets = new ArrayList();
+        this.targets = new ArrayList<Target>();
         this.geoTool = new GeoTool();
         this.setViewingAngle(90.0);
     }
@@ -119,20 +118,15 @@ public class Device {
         this.maxViewingAngle = maxViewingAngle;
     }
 
-    public void LookAt() {
-        if (true) {
-
-        }
-    }
-
     /**
      * atualizar o nome da função comecei pra um proposito e mudei pra outro
      * totalmente diferente
      *
      * @param targ
+     * @param nada
      */
     public void UnusedAddTarget(Target targ, int nada) {
-        if (this.targets.size() == 0) {
+        if (this.targets.isEmpty()) {
             this.targets.add(targ);
             targ.setPriority(true);
             this.setAngle(geoTool.angleCalculator(this.Latitude, this.Longitude, targ.getLatitude(), targ.getLongitude()));
@@ -238,7 +232,7 @@ public class Device {
      * @throws ArduinoException
      */
     public void LookAt(double angle){
-        String valueString = String.format(Locale.US, "%.8f", angle);
+        String valueString = String.format(Locale.US, "%.3f", angle);
         this.sendData(valueString);
         this.setAngle(angle);
         
@@ -265,7 +259,6 @@ public class Device {
         port.writeBytes(data.getBytes(), data.length());
 
         port.closePort();
-        //arduino.sendData(data);
     }
 
     public String receiveData(){
@@ -279,7 +272,7 @@ public class Device {
         port.setComPortParameters(baudRate, 8, 1, 0);
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

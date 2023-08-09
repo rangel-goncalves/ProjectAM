@@ -47,7 +47,6 @@ public class Manager {
             double ang = this.geoTool.SearchCaller(device.getLatitude(), device.getLongitude(), Latitude, Longitude, this.maxDistance);
             System.out.println(ang);
             if(ang!=-1){
-                //device.LookAt(ang);
                 System.out.println(device.getCode() + "se moveu para " + ang + "---"+ LocalDateTime.now()+ "\n");
                 this.log += device.getCode() + "se moveu para " + ang + "---"+ LocalDateTime.now()+ "\n";
                 
@@ -61,7 +60,7 @@ public class Manager {
             System.out.println(look);
             if(look!=-1){
                 device.AddTarget(targ);
-                //System.out.println("data enviada"+device.receiveData());
+                System.out.println("data receved"+device.receiveData());
             }
         }
     }
