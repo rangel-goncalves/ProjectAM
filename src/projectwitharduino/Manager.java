@@ -33,8 +33,8 @@ public class Manager {
         System.out.println(log);
     }
 
-    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist){
-        Device d = new Device(port, baudRate, Latitude, Longitude, code, maxDist);
+    public void AddDevice(String port, int baudRate, double Latitude, double Longitude, String code, double maxDist, double heightDevice){
+        Device d = new Device(port, baudRate, Latitude, Longitude, code, maxDist, heightDevice);
         devices.add(d);
     }
 
@@ -60,7 +60,7 @@ public class Manager {
             System.out.println(look);
             if(look!=-1){
                 device.AddTarget(targ);
-                System.out.println("data receved"+device.receiveData());
+                //System.out.println("data receved"+device.receiveData());
             }
         }
     }

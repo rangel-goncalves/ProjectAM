@@ -24,9 +24,11 @@ public class Device {
     private boolean aiming;
     private ArrayList<Target> targets;
     private double maxDist;
+    private double heightDevice;
     private final GeoTool geoTool;
 
-    public Device(String portName, int baudRate, double Latitude, double Longitude, String code, double maxDist){
+    public Device(String portName, int baudRate, double Latitude, double Longitude, String code, double maxDist, double heightDevice){
+        this.heightDevice = heightDevice;
         this.portName = portName;
         this.baudRate = baudRate;
         this.Latitude = Latitude;
@@ -197,7 +199,7 @@ public class Device {
         this.setMinViewingAngle(min);
         System.out.println(this.getMinViewingAngle() + " ate " + this.getMaxViewingAngle());
 
-            this.LookAt(this.getAngle());
+            this.LookAt(this.getAngle(), this.AngleAxis2(targ));
 
         System.out.println(this.getAngle());
     }
@@ -218,12 +220,18 @@ public class Device {
                     grausMedio += 360;
                 }
                 this.sharedAngle = grausMedio;
-                    this.LookAt(this.sharedAngle);
+                    this.LookAt(this.sharedAngle, this.AngleAxis2(targ));
 
                 System.out.println(grausMedio);
             }
     }
-
+    
+    public double AngleAxis2(Target targ){
+        double ang = Math.atan(this.geoTool.latAndLgnToDistance(targ.getLatitude(), targ.getLongitude(), this.Latitude, this.Longitude)/this.heightDevice);
+        
+        return ang;
+    }
+    
     /**
      * NÃo USE!
      *
@@ -231,8 +239,11 @@ public class Device {
      * @throws SerialPortException
      * @throws ArduinoException
      */
-    public void LookAt(double angle){
-        String valueString = String.format(Locale.US, "%.3f", angle);
+    public void LookAt(double angleZRot, double angleVertRot){
+        String valueStringZrot = String.format(Locale.US, "%.3f", angleZRot);
+        String valueStringVertRot = String.format(Locale.US, "%.3f", angleVertRot);
+        String valueString = valueStringZrot+','+valueStringVertRot;
+        System.out.println(valueString);
         this.sendData(valueString);
         this.setAngle(angle);
         
