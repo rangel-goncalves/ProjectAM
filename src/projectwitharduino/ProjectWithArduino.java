@@ -17,10 +17,10 @@ public class ProjectWithArduino {
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM3", 9600, -9.5531069903898, -35.77668498123376, "1",300, 20);
+        m.AddDevice("COM4", 9600, -9.553197759667203, -35.77669155520027, "1",300, 20);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
-        Target t1 = new Target(-9.553094942290073, -35.776511462156925);
+        Target t1 = new Target(-9.553151721288552, -35.77675916913939);
         Target t2 = new  Target(-9.553135897751222, -35.77707121424325);
         t.add(t1);
         t.add(t2);

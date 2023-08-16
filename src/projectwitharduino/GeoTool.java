@@ -16,17 +16,25 @@ public class GeoTool {
         }
         return -1;
     }
-
+    /**
+     * ajuste o valor da var madida para fazer a alteração da unidade da distancia[1= Km, 1000 = m]
+     * @param firstLatitude
+     * @param firstLongitude
+     * @param secondLatitude
+     * @param secondLongitude
+     * @return 
+     */
     public Double latAndLgnToDistance(double firstLatitude, double firstLongitude, double secondLatitude, double secondLongitude) {
         double EARTH_RADIUS_KM = 6371.009;
         double firstLatToRad = Math.toRadians(firstLatitude);
         double secondLatToRad = Math.toRadians(secondLatitude);
+        int medida = 1000;
         // Diferença das longitudes
         double deltaLongitudeInRad = Math.toRadians(firstLongitude - secondLongitude);
         // calculo da distancia
         Double a = Math.acos(Math.cos(firstLatToRad) * Math.cos(secondLatToRad)
                 * Math.cos(deltaLongitudeInRad) + Math.sin(firstLatToRad)
-                * Math.sin(secondLatToRad)) * EARTH_RADIUS_KM;
+                * Math.sin(secondLatToRad)) * EARTH_RADIUS_KM*medida;
         this.angleCalculator(firstLatitude, firstLongitude, secondLatitude, secondLongitude);
         return a;
     }

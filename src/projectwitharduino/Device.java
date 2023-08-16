@@ -121,6 +121,7 @@ public class Device {
     }
 
     /**
+     * NÃO UTILIZADA
      * atualizar o nome da função comecei pra um proposito e mudei pra outro
      * totalmente diferente
      *
@@ -227,8 +228,7 @@ public class Device {
     }
     
     public double AngleAxis2(Target targ){
-        double ang = Math.atan(this.geoTool.latAndLgnToDistance(targ.getLatitude(), targ.getLongitude(), this.Latitude, this.Longitude)/this.heightDevice);
-        
+        double ang = Math.atan(this.heightDevice / this.geoTool.latAndLgnToDistance(targ.getLatitude(), targ.getLongitude(), this.Latitude, this.Longitude));
         return ang;
     }
     
@@ -243,12 +243,15 @@ public class Device {
         String valueStringZrot = String.format(Locale.US, "%.3f", angleZRot);
         String valueStringVertRot = String.format(Locale.US, "%.3f", angleVertRot);
         String valueString = valueStringZrot+','+valueStringVertRot;
-        System.out.println(valueString);
+        System.out.println(valueString+"---"+angleVertRot);
         this.sendData(valueString);
         this.setAngle(angle);
         
     }
-
+    /**
+     * Ficar atento com o time do sleep, mudei para 1000 mas inicialmente era 2000
+     * @param data 
+     */
     public void sendData(String data) {
         SerialPort port = SerialPort.getCommPort(portName);
 
@@ -260,7 +263,7 @@ public class Device {
         port.setComPortParameters(baudRate, 8, 1, 0);
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -283,7 +286,7 @@ public class Device {
         port.setComPortParameters(baudRate, 8, 1, 0);
 
         try {
-            Thread.sleep(0);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
