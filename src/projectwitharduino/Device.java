@@ -202,7 +202,7 @@ public class Device {
 
             this.LookAt(this.getAngle(), this.AngleAxis2(targ));
 
-        System.out.println(this.getAngle());
+        //System.out.println(this.getAngle());
     }
 
     public void SharedAngleCalculartor(Target targ) {
@@ -243,13 +243,14 @@ public class Device {
         String valueStringZrot = String.format(Locale.US, "%.3f", angleZRot);
         String valueStringVertRot = String.format(Locale.US, "%.3f", angleVertRot);
         String valueString = valueStringZrot+','+valueStringVertRot;
-        System.out.println(valueString+"---"+angleVertRot);
+        //System.out.println(valueString+"---"+angleVertRot);
         this.sendData(valueString);
         this.setAngle(angle);
         
     }
     /**
-     * Ficar atento com o time do sleep, mudei para 1000 mas inicialmente era 2000
+     * Fazer a mudança da ruim deixa 2000 msm
+     * (Ficar atento com o time do sleep, mudei para 1000 mas inicialmente era 2000)
      * @param data 
      */
     public void sendData(String data) {
@@ -263,7 +264,7 @@ public class Device {
         port.setComPortParameters(baudRate, 8, 1, 0);
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

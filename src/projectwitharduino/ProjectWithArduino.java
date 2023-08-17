@@ -12,7 +12,7 @@ public class ProjectWithArduino {
         public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Manager m = new Manager(200.00);
-        m.AddDevice("COM4", 9600, -9.553197759667203, -35.77669155520027, "1", 300, 20);
+        m.AddDevice("COM6", 9600, -9.553197759667203, -35.77669155520027, "1", 1, 20);
 
         ArrayList<Target> t = new ArrayList<>();
         Target t1 = new Target(-9.553151721288552, -35.77675916913939,1);
@@ -35,6 +35,7 @@ public class ProjectWithArduino {
         // Wait for all threads to finish
         for (Thread thread : threads) {
             try {
+                System.out.println("terminei");
                 thread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -49,7 +50,7 @@ public class ProjectWithArduino {
         
         Scanner scanner = new Scanner(System.in);
         Manager m  = new Manager(200.00);
-        m.AddDevice("COM4", 9600, -9.553197759667203, -35.77669155520027, "1",300, 20);
+        m.AddDevice("COM6", 9600, -9.553197759667203, -35.77669155520027, "1",300, 20);
         ArrayList<Target> t = new ArrayList();
         int i = 0;
         Target t1 = new Target(-9.553151721288552, -35.77675916913939);
