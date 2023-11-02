@@ -3,6 +3,8 @@ package projectwitharduino;
 /**
  *
  * @author Rangel
+ *  Fórmula de Haversine
+ * https://forum.maparadar.com/viewtopic.php?t=5181
  */
 public class GeoTool {
 
@@ -17,7 +19,7 @@ public class GeoTool {
         return -1;
     }
     /**
-     * ajuste o valor da var madida para fazer a alteração da unidade da distancia[1= Km, 1000 = m]
+     * ajuste o valor da var medida para fazer a alteração da unidade da distancia[1= Km, 1000 = m]
      * @param firstLatitude
      * @param firstLongitude
      * @param secondLatitude
@@ -56,5 +58,5 @@ public class GeoTool {
         double angle = Math.atan2(y, x);
         brng = (angle * 180 / Math.PI + 360.0) % 360.0;
         return brng;
-    }
+    } 
 }

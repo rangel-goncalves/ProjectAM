@@ -7,12 +7,17 @@ import java.util.Scanner;
 /**
  * @author Rangel
  * inicio do git
+ * 11099.5403
+ * m.AddDevice("COM6", 9600, -34.83333, -58.5166646, "1", 1, 20);
+
+        ArrayList<Target> t = new ArrayList<>();
+        Target t1 = new Target(49.0083899664, 2.53844117956,1);
  */
 public class ProjectWithArduino {
         public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Manager m = new Manager(200.00);
-        m.AddDevice("COM6", 9600, -9.553197759667203, -35.77669155520027, "1", 1, 20);
+        Manager m = new Manager(2000.00);
+        m.AddDevice("COM6", 9600, -9.553197759667203, -35.77669155520027, "1", 200, 20);
 
         ArrayList<Target> t = new ArrayList<>();
         Target t1 = new Target(-9.553151721288552, -35.77675916913939,1);
